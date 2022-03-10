@@ -46,6 +46,7 @@ exports.signin = (req, res, next) => {
     username: user.username,
     firstName: user.firstName,
     lastName: user.lastName,
+    email: user.email,
     exp: Date.now() + keys.JWT_EXPIRATION_MS,
   };
 
