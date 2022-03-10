@@ -10,3 +10,16 @@ exports.controllerGetTrips = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.controllerAddTrip = async (req, res, next) => {
+  try {
+    // if (req.file) {
+    //   req.body.image = `/${req.file.path}`;
+    // }
+    const trip = req.body;
+    const createdTrip = await Trip.create(trip);
+    res.status(200).json({ msg: "Trip Created", payload: createdTrip });
+  } catch (error) {
+    next(error);
+  }
+};
