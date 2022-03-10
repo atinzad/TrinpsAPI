@@ -12,8 +12,9 @@ const UserSchema = new Schema(
     email: { type: String, validate: isEmailValid },
     firstName: String,
     lastName: String,
+
     //trips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
-    //profile: {}
+    profile: { type: Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );

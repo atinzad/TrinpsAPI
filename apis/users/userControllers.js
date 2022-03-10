@@ -2,6 +2,7 @@ const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { keys } = require("../../config/keys");
+const Profile = require("../../models/Profile");
 
 exports.controllerGetUsers = async (req, res, next) => {
   try {
@@ -20,6 +21,18 @@ exports.signup = async (req, res, next) => {
     req.body.password = await bcrypt.hash(password, saltRounds);
 
     const newUser = await User.create(req.body);
+    console.log("newUser: ", newUser);
+    const newProfile = await Profile.create({
+      bio: "",
+      image: "",
+      user: newUser._id,
+    });
+
+    newUser.profile = newProfile;
+    await User.findByIdAndUpdate(newUser._id, newUser, {
+      runValidators: true,
+      new: true,
+    });
 
     const payload = {
       _id: newUser._id,
