@@ -16,6 +16,7 @@ exports.controllerAddTrip = async (req, res, next) => {
     // if (req.file) {
     //   req.body.image = `/${req.file.path}`;
     // }
+    req.body.owner = req.user._id;
     const trip = req.body;
     const createdTrip = await Trip.create(trip);
     res.status(200).json({ msg: "Trip Created", payload: createdTrip });
