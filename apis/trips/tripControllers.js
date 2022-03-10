@@ -2,7 +2,10 @@ const Trip = require("../../models/Trip");
 
 exports.controllerGetTrips = async (req, res, next) => {
   try {
-    const trips = await Trip.find().populate("owner");
+    const trips = await Trip.find().populate({
+      path: "owner",
+      select: ["username", "email", "firstName", "lastName"],
+    });
 
     // console.log(users);
     res.json({ msg: "Trips fetched", payload: trips });
