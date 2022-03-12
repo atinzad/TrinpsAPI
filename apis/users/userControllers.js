@@ -21,7 +21,7 @@ exports.signup = async (req, res, next) => {
     req.body.password = await bcrypt.hash(password, saltRounds);
 
     const newUser = await User.create(req.body);
-    console.log("newUser: ", newUser);
+
     const newProfile = await Profile.create({
       bio: "",
       image: "",
@@ -40,6 +40,7 @@ exports.signup = async (req, res, next) => {
       email: newUser.email,
       firstName: newUser.firstName,
       lastName: newUser.lastName,
+      profile: newProfile._id.toString(),
       exp: Date.now() + keys.JWT_EXPIRATION_MS,
     };
 
@@ -60,6 +61,7 @@ exports.signin = (req, res, next) => {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
+    profile: user.profile.toString(),
     exp: Date.now() + keys.JWT_EXPIRATION_MS,
   };
 

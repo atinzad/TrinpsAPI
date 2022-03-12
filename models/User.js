@@ -14,7 +14,7 @@ const UserSchema = new Schema(
     lastName: String,
 
     //trips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
-    profile: { type: Schema.Types.ObjectId, ref: "User" },
+    profile: { type: Schema.Types.ObjectId, ref: "Profile" },
   },
   { timestamps: true }
 );
