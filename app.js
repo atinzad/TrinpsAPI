@@ -27,6 +27,8 @@ const userRoutes = require("./apis/users/userRoutes");
 app.use("/api/users", userRoutes);
 const tripRoutes = require("./apis/trips/tripRoutes");
 app.use("/api/trips", tripRoutes);
+const profileRoutes = require("./apis/profiles/profileRoutes");
+app.use("/api/profiles", profileRoutes);
 
 //? Error handler Middleware
 app.use((err, req, res, next) => {
