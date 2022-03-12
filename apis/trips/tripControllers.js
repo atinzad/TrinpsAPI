@@ -27,3 +27,31 @@ exports.controllerAddTrip = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.controllerFetchTrip = async (tripId, next) => {
+  try {
+    const trip = await Trip.findById(tripId);
+
+    if (trip) return trip;
+    else {
+      const error = new Error("Trip ID was not found!");
+      error.status = 404;
+      next(error);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.controllerDeleteTrip = async (req, res, next) => {
+  try {
+    if (JSON.stringify(req.trip.owner) === JSON.stringify(req.user._id)) {
+      await req.trip.remove();
+      res.status(204).end();
+    } else {
+      res.status(401).json({ msg: "You are not the trip owner" });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
