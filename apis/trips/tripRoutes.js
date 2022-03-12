@@ -7,6 +7,7 @@ const {
   controllerAddTrip,
   controllerFetchTrip,
   controllerDeleteTrip,
+  controllerUpdateTrip,
 } = require("./tripControllers");
 
 const router = express.Router();
@@ -33,6 +34,11 @@ router.delete(
   "/:tripId",
   passport.authenticate("jwt", { session: false }),
   controllerDeleteTrip
+);
+router.put(
+  "/:tripId",
+  //   passport.authenticate("jwt", { session: false }),
+  controllerUpdateTrip
 );
 
 module.exports = router;

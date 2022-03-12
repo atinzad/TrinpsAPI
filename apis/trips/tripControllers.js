@@ -55,3 +55,27 @@ exports.controllerDeleteTrip = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.controllerUpdateTrip = async (req, res, next) => {
+  try {
+    // if (req.file) {
+    //   req.body.image = `${req.protocol}://${req.get("host")}/${req.file.path}`;
+    // }
+    // if (JSON.stringify(req.trip.owner) === JSON.stringify(req.user._id)) {
+    const id = req.trip._id;
+    const trip = req.body;
+    const updatedTrip = await Trip.findByIdAndUpdate(id, trip, {
+      runValidators: true,
+      new: true,
+    });
+    res.status(200).json({
+      msg: "Trip Updated",
+      payload: updatedTrip,
+    });
+    // } else {
+    //   res.status(401).json({ msg: "You are not the trip owner" });
+    // }
+  } catch (error) {
+    next(error);
+  }
+};
