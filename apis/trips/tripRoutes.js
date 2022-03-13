@@ -13,6 +13,7 @@ const {
 const router = express.Router();
 
 router.param("tripId", async (req, res, next, tripId) => {
+  console.log("tripid", tripId);
   const trip = await controllerFetchTrip(tripId, next);
   if (trip) {
     req.trip = trip;

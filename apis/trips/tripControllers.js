@@ -4,7 +4,7 @@ exports.controllerGetTrips = async (req, res, next) => {
   try {
     const trips = await Trip.find().populate({
       path: "owner",
-      select: ["username", "email", "firstName", "lastName"],
+      select: ["username", "email", "firstName", "lastName", "profile"],
     });
 
     // console.log(users);

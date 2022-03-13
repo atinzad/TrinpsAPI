@@ -31,7 +31,7 @@ exports.controllerUpdateProfile = async (req, res, next) => {
     }
     const profileId = req.profile._id;
     const profile = req.body;
-    const profileUpdated = await Profile.findOneAndUpdate(profileId, profile, {
+    const profileUpdated = await Profile.findByIdAndUpdate(profileId, profile, {
       new: true,
       runValidators: true,
     });
